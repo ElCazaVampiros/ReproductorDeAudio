@@ -36,6 +36,7 @@ namespace ReproductorAudio
         //exclusivo para salidas
         WaveOut output;
 
+        bool dragging = false;
 
         public MainWindow()
         {
@@ -56,6 +57,11 @@ namespace ReproductorAudio
             lblTiempoActual.Text =
                 reader.CurrentTime.ToString().
                 Substring(0, 8);
+
+            if (!dragging)
+            {
+                sldTiempo.Value = reader.CurrentTime.TotalSeconds;
+            }
         }
 
         void ListarDispositivosSalida()
@@ -119,6 +125,11 @@ namespace ReproductorAudio
                         reader.CurrentTime.ToString().
                         Substring(0, 8);
 
+                    sldTiempo.Maximum = 
+                        reader.TotalTime.TotalSeconds;
+                    sldTiempo.Value = 
+                        reader.CurrentTime.TotalSeconds;
+
                     timer.Start();
                 }
             }
@@ -151,6 +162,22 @@ namespace ReproductorAudio
                 btnReproducir.IsEnabled = true;
                 btnPausa.IsEnabled = false;
                 btnDetener.IsEnabled = true;
+            }
+        }
+
+        private void sldTiempo_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            dragging = true;
+
+        }
+
+        private void sldTiempo_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            dragging = false;
+
+            if (reader != null && output != null && output.PlaybackState != PlaybackState.Stopped)
+            {
+                reader.CurrentTime = TimeSpan.FromSeconds(sldTiempo.Value);
             }
         }
     }

@@ -13,7 +13,8 @@
 		<Button x:Name="btnExaminar" Content="Examinar" HorizontalAlignment="Left" Margin="322,28,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="BtnExaminar_Click"/>
 		<TextBlock x:Name="lblTiempoActual" HorizontalAlignment="Left" Margin="32,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="0"/><Run Text="0"/><Run Text=":00:00"/></TextBlock>
 		<TextBox x:Name="txtRutaArchivo" HorizontalAlignment="Left" Height="24" Margin="32,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" IsEnabled="False"/>
-		<Slider x:Name="sldTiempo" HorizontalAlignment="Left" Margin="32,122,0,0" VerticalAlignment="Top" Width="361"/>
+        <Slider x:Name="sldTiempo" HorizontalAlignment="Left" Margin="32,122,0,0" VerticalAlignment="Top" Width="361" Thumb.DragStarted="sldTiempo_DragStarted"
+                Thumb.DragCompleted="sldTiempo_DragCompleted"/>
 		<TextBlock x:Name="lblTiempoTotal" HorizontalAlignment="Left" Margin="349,96,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top"/>
 		<TextBlock HorizontalAlignment="Left" Margin="32,157,0,0" TextWrapping="Wrap" Text="Elegir dispositivo de salida" VerticalAlignment="Top" Width="147"/>
 		<ComboBox x:Name="cbDispositivoSalida" HorizontalAlignment="Left" Margin="32,178,0,0" VerticalAlignment="Top" Width="366"/>
